@@ -1,0 +1,17 @@
+{% extends 'account_folder/account_base.html' %}
+{% load static %}
+{% block title %}Delete-Blog{% endblock title %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4">Delete Post</h4>
+      <div class="row">
+          <form method="post">
+              {% csrf_token %}
+              <div class="alert alert-info" role="alert">Your blog will be deleted forever and this action is irreversible!</div>
+              <input type="submit" value="delete" class="btn btn-danger">
+          </form> 
+      </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'account_folder/account_base.html' %}
+{% load static %}
+
+{% block title %}Update-Post{% endblock title %}
+
+{% block content %}
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Save Post</h4>
+    <div class="row">
+      <form id="formAccountSettings" method="post" enctype='multipart/form-data'>
+      {% for f in form %}
+        {% if f.name == "status_publish"%}
+          status_publish:
+          <select name="status_publish" id="id_status_publish">
+          <option value="draft" selected>draft</option>
+        {% else %}
+          {{f.name}}:
+          {{f}}
+        {% endif %}
+      <br>
+      <br>
+      {% endfor %}
+        {% csrf_token %}
+        <input type="submit" value="Save changes" class="btn btn-primary me-2">
+      </form>
+    </div>
+  </div>
+{% endblock content %}

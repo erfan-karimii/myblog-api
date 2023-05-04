@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<body>
+    
+   
+      
+<section class="banner" id="top" style="background-image: url({% static 'img/homepage-banner-image-1920x700.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="banner-caption">
+                    <div class="line-dec"></div>
+                    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+                    <div class="blue-button">
+                        <a href="/contact">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <main>
+        <section class="our-services">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="left-content">
+                            <br>
+                            <h4>About us</h4>
+                            <p>Aenean hendrerit metus leo, quis viverra purus condimentum nec. Pellentesque a sem semper, lobortis mauris non, varius urna. Quisque sodales purus eu tellus fringilla.<br><br>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellus, id efficitur leo. In hac habitasse platea dictumst. Vel sequi odit similique repudiandae ipsum iste, quidem tenetur id impedit, eaque et, aliquam quod.</p>
+                            <div class="blue-button">
+                                <a href="/about-us">Discover More</a>
+                            </div>
+
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'img/about-1-720x480.jpg' %}" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-places">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <span>Latest blog posts</span>
+                            {% comment %} <h2>Lorem ipsum dolor sit amet ctetur.</h2> {% endcomment %}
+                        </div>
+                    </div> 
+                </div> 
+                <div class="row">
+                {% for x in last_posts %}
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="featured-item">
+                            <div class="thumb">
+                                <div class="thumb-img">
+                                    <img src="{{x.image.url}}" width="230" height="345"  alt="">
+                                </div>
+
+                                <div class="overlay-content">
+                                 <strong title="Author"><i class="fa fa-user"></i> {{x.author}} </strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                 <strong title="Posted on"><i class="fa fa-calendar"></i>{{x.create_date}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                 {% comment %} <strong title="Views"><i class="fa fa-map-marker"></i> 115</strong> {% endcomment %}
+                                </div>
+                            </div>
+
+                            <div class="down-content">
+                                <h4>{{x.title}}</h4>
+
+                                <p> {{x.text|truncatewords:10}} </p>
+
+                                <div class="text-button">
+                
+                                    <a href="{% url 'blog:detail' x.id %}">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {%  endfor  %}
+                </div>
+            </div>
+        </section>
+
+        <section id="video-container">
+            <div class="video-overlay"></div>
+            <div class="video-content">
+                <div class="inner">
+                      <div class="section-heading">
+                          <span>Contact Us</span>
+                          <h2>Vivamus nec vehicula felis</h2>
+                      </div>
+                      <!-- Modal button -->
+
+                      <div class="blue-button">
+                        <a href="/contactus">Talk to us</a>
+                      </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+
+    
+
+   
+</body>
+{% endblock %}

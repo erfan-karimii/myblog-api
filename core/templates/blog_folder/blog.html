@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+        
+
+      
+    <section class="banner banner-secondary" id="top" style="background-image: url({% static 'img/banner-image-1-1920x300.jpg'%});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="banner-caption">
+                        <div class="line-dec"></div>
+                        <h2>Blog</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section class="featured-places">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-8 col-xs-12">
+                        <div class="row">
+                            {% for blog in page_obj %}
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="featured-item">
+                                    <div class="thumb">
+                                        <div class="thumb-img">
+                                            <img src="{{blog.image.url}}" width="230" height="345" alt="">
+                                        </div>
+
+                                        <div class="overlay-content">
+                                         <strong title="Author"><i class="fa fa-user"></i> {{blog.author}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                         <strong title="Posted on"><i class="fa fa-calendar"></i> {{blog.create_date}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                         
+                                        </div>
+                                    </div>
+
+                                    <div class="down-content">
+                                        <h4>{{blog.title}}</h4>
+
+                                        <p>{{blog.text|truncatewords:10}} </p>
+
+                                        <div class="text-button">
+                                            <a href="{% url 'blog:detail' blog.id%}">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-xs-12">
+                        <div class="form-group">
+                            <h4>Blog Search</h4>
+                        </div>
+
+                        <form action="" method="GET">
+                            {{ form.as_p }}
+                            
+                            {% comment %} <div class="form-group">
+                            <div class="input-group">
+                                <input name='text' type="text" class="form-control" placeholder="Search" aria-label="text" aria-describedby="basic-addon2">
+                            </div>
+                        </div> {% endcomment %}
+                        <button type="submit" value='save'>save</button>
+                    </form>
+
+                        <br>
+
+                        <div class="form-group">
+                            <h4>categorys</h4>
+                        </div>
+                        {% for category in categorys %}
+                        <p><a href="{% url 'blog:cat' category.name %}">{{category.name}}</a></p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+    {% endif %}
+    <a href="{{ page_obj.number }}" class='active'>{{ page_obj.number }}</a>
+    {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+            <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        {% endif %}
+</div>
+</body>
+
+
+{% endblock %}

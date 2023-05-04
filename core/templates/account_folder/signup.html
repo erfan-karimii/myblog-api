@@ -1,0 +1,92 @@
+{% load static %}
+
+<div class="wrap">
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="primary-nav-button" type="button">Menu</button>
+                    <a href="{% url 'blog:home'%}"><div class="logo">
+                        <img src="{% static 'img/logo.png'%}" alt="Venue Logo" width="220px" height='100px'>
+                    </div></a>
+                    <nav id="primary-nav" class="dropdown cf">
+                    </nav><!-- / #primary-nav -->
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<br>
+<br>
+    <div class="cont">
+        <div class="form sign-in">
+            <form action='' method="post">
+                {% csrf_token %}
+                <h2>Welcome</h2>
+                <br>
+                <br>
+                <label for="id_username">
+                    <span>username</span>
+                    <input  type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required id="id_username">
+                </label>
+                <label for="id_password1">
+                    <span>Password</span>
+                    <input type="password" name="password1" autocomplete="new-password" required id="id_password1">
+                </label>
+                <label for="id_password2">
+                    <span>Password confirmation:</span>
+                    <input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+                </label>
+                <br>
+                <button type='submit' value='save' class="submit">Sign UP</button>
+                {% if error_view %}
+<br>
+                <p align='center'>{{error_view}}</p>
+       
+                {% endif %}
+            </form>
+        </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img__text m--up">
+                    
+                    <h3>To Use Our Blog Properly Please sign up!<h3>
+                        <br>
+                        <hr>
+                        <br>
+                        {% if error_view %}
+                    <h4>username should be uniq .</h4>
+                    <br>
+                    <h4>password should be 150 characters or fewer. Letters, digits and @/./+/-/_ only .</h4> 
+                    <br>
+                    <h4>password should be Your password can’t be too similar to your other personal information .</h4> 
+                </div>
+                {% endif %}
+            </div>
+            <div class="form sign-up">
+                <h2>Create your Account</h2>
+                <label>
+                    <span>Name</span>
+                    <input type="text" />
+                </label>
+                <label>
+                    <span>Email</span>
+                    <input type="email" />
+                </label>
+                <label>
+                    <span>Password</span>
+                    <input type="password" />
+                </label>
+               
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.img__btn').addEventListener('click', function() {
+            document.querySelector('.cont').classList.toggle('s--signup');
+        });
+    </script>

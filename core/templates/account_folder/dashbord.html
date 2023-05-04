@@ -1,0 +1,60 @@
+{% extends 'account_folder/account_base.html' %}
+
+{% load static %}
+{% block title %}Dashboard{% endblock title %}
+{% block content %}
+      <div class="content-wrapper">
+        <!-- Content -->
+        
+        <div class="container-xxl flex-grow-1 container-p-y">
+          {% comment %} <img src="{{account_de.avatar.url}}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar"> {% endcomment %}
+<br>
+          <ul class="nav nav-pills flex-column flex-md-row mb-3">
+            <li class="nav-item">
+              <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> myblogs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account:update_user' account_de.id %}"><i class="bx bx-link-alt me-1"></i> Profile</a>
+            </li>
+          
+          </ul>
+          {% comment %} <ul class="nav nav-pills flex-column flex-md-row mb-3">
+          <li class="nav-item">
+            <img src="../assets/img/avatars/1.png" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
+          </li>
+        </ul> {% endcomment %}
+
+      
+          <div class="row mb-5">
+            {% for blog in author_blogs %}
+            <div class="col-md-6 col-lg-4 mb-3">
+            
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">{{blog.title}}</h5>                     
+                </div>
+                <img class="img-fluid" src="{{blog.image.url}}" alt="Card image cap" />
+                <div class="card-body">
+                  <p class="card-text">{{blog.text|truncatewords:10}}</p>
+                  <a href="{% url 'blog:detail' blog.id %}" class="card-link">Visit-In-Site</a>
+                  <a href="{% url 'account:update_blog' blog.id %}" class="card-link">Update</a>
+                  <a href="{% url 'account:delete_blog' blog.id %}" class="card-link">Delete</a>
+                </div>
+              </div>
+            
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock content %}
+  
+
+
+

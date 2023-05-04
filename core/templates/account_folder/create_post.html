@@ -1,0 +1,22 @@
+{% extends 'account_folder/account_base.html' %}
+{% load static %}
+
+{% block title %}Save-Post{% endblock title %}
+
+{% block content %}
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Save Post</h4>
+    <div class="row">
+      <div class="col-xl">
+        <div class="card mb-4">
+          <form id="formAccountSettings" method="post" enctype='multipart/form-data'>
+          {{form.as_p}}
+          {% csrf_token %}
+          <input type="submit" value="Save changes" class="btn btn-primary me-2">
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

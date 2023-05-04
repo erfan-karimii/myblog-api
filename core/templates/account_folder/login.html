@@ -1,0 +1,61 @@
+{% load static %}
+
+<div class="wrap">
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="primary-nav-button" type="button">Menu</button>
+                    <a href="{% url 'blog:home'%}"><div class="logo">
+                        <img src="{% static 'img/logo.png'%}" alt="Venue Logo" width="220px" height='100px'>
+                    </div></a>
+                    <nav id="primary-nav" class="dropdown cf">
+                    </nav><!-- / #primary-nav -->
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<br>
+<br>
+    <div class="cont">
+        <div class="form sign-in">
+            <h2>Welcome To Login Page</h2>
+            <form method="post">
+                {% csrf_token %}
+            <label for="id_username">
+                <span>Username</span>
+                <input  type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" />
+            </label>
+            <label  for="id_password">
+                <span>Password</span>
+                <input type="password" name="password" autocomplete="current-password" required id="id_password">
+            </label>
+            <button type="submit" value="save" class="submit">Sign In</button>
+            <p align='center'>{{error_view}}</p>
+        </form>
+         
+        </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img__text m--up">
+                 
+                    <h3>Don't have an account? Please Sign up!<h3>
+                        <br>
+                        <a href="/account/register" id=login-button>
+                            <div >
+                                Sign up
+                            </div>
+                        </a>
+                </div>
+                <div class="img__text m--in">
+                
+                    <h3>If you already has an account, just sign in.<h3>
+                </div>
+
+            </div>
+       
+        </div>
+    </div>

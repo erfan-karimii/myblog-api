@@ -1,0 +1,30 @@
+{% extends 'account_folder/account_base.html' %}
+{% load static %}
+{% block title %}Account-Settings{% endblock title %}
+{% block content %}
+<div class="content-wrapper"> 
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"> Account Settings</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <form id="formAccountSettings" method="post" enctype='multipart/form-data'>
+          {{form.as_p}}
+          {% csrf_token %}
+          <input type="submit" value="Save changes" class="btn btn-primary me-2">
+        </form>
+        <div class="card">
+          <h5 class="card-header">Delete Account</h5>
+          <div class="card-body">
+            <div class="mb-3 col-12 mb-0">
+              <div class="alert alert-warning">
+                <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
+                <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+              </div>
+            </div>                  
+              <a type="submit" class="btn btn-danger deactivate-account" href="/account/deactive">Deactivate Account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
