@@ -1,4 +1,5 @@
 from django.shortcuts import render , redirect
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm ,AuthenticationForm
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User
@@ -17,13 +18,11 @@ def SignUpview(request):
         else:
             error_view = "Pleas Try Again"
             return render(request,'account_folder/signup.html',{'form':form,'error_view':error_view})
-
     else:
         form = UserCreationForm()
         return render(request,'account_folder/signup.html',{'form':form,})
 
-
-def loginview(request):         #context ino dorost konam
+def loginview(request):
 
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
@@ -45,7 +44,6 @@ def loginview(request):         #context ino dorost konam
         form = AuthenticationForm()
     
     return render(request,'account_folder/login.html',{'form':form})
-
 
 def LogOut(request):
     logout(request)
@@ -75,6 +73,7 @@ class DeleteBlogPost(DeleteView):
     model = Blog
     template_name = 'account_folder/delete_post.html'
     success_url = reverse_lazy('account:profile')
+
 def deactive_profile(request):        
     user = request.user
     user.is_active = False
