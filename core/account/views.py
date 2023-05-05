@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView , CreateView , DeleteView
 from django.urls import reverse_lazy
 from blog.models import Blog  
-from .models import AccountDetail
+from .models import AccountInfo
 # Create your views here.
 
 def SignUpview(request):
@@ -30,10 +30,10 @@ def loginview(request):
             user = form.get_user()
             login(request,user)
             try:
-                AccountDetail.objects.get(user_account_id=user.id)              
+                AccountInfo.objects.get(user_account_id=user.id)              
                 return redirect('blog:home')
             except:
-                AccountDetail.objects.create(user_account=user) 
+                AccountInfo.objects.create(user_account=user) 
                 return redirect('blog:home')
             
 
@@ -51,11 +51,11 @@ def LogOut(request):
 
 def list_author_blog(request):
     blogs = Blog.objects.filter(status_publish='publish',author_id=request.user.id)
-    account_de = AccountDetail.objects.get(user_account_id=request.user.id)
+    account_de = AccountInfo.objects.get(user_account_id=request.user.id)
     return render(request,'account_folder/dashbord.html',{'author_blogs':blogs,'account_de':account_de})
 
 class UpdateDetailUser(UpdateView):
-    model = AccountDetail
+    model = AccountInfo
     template_name = "account_folder/account_settings.html"
     fields= ['first_name','last_name','email','phone_number','state','avatar']
     

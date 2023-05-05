@@ -1,10 +1,14 @@
-from django.urls import path
+from django.urls import path , include
 from . import views
 
 
 app_name = 'blog'
 
 
+api_urlpatterns = [
+    path('authors/',views.author_info_api, name='authors-api'),
+
+]
 
 urlpatterns = [
     path('',views.home, name='home'),
@@ -14,5 +18,7 @@ urlpatterns = [
     path('blog_detail/<id>',views.detail_blog_view, name='detail'),
     path('blog/<cat>',views.category_blog_view, name='cat'),
     path('blog_author_view/<auth_id>',views.author_blog_view, name='auth'),
+    path('api-view/',include(api_urlpatterns))
+    
     
 ]

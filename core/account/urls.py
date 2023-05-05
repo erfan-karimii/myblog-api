@@ -13,6 +13,6 @@ urlpatterns = [
 	path('create_blog/',views.CreateBlogPost.as_view(),name='create_blog'),
 	path('update_blog/<pk>',views.UpdateBlogPost.as_view(),name='update_blog'),
 	path('delete_blog/<pk>',views.DeleteBlogPost.as_view(),name='delete_blog'),
-
+    
      
 ]

@@ -7,7 +7,7 @@ from rest_framework.reverse import reverse
 
 from blog.models import Blog , Category
 from .serializers import BlogSerializer , HyperBlogSerializer 
-
+from django_filters import rest_framework as filters
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -15,6 +15,8 @@ def api_root(request, format=None):
         'users': reverse('user-list', request=request, format=format),
         'groups': reverse('group-list', request=request, format=format),
         'blogs': reverse('blog-list', request=request, format=format),
+        'account-infos': reverse('account-info-list', request=request, format=format),
+
 
     })
 # class BlogList(APIView):
@@ -35,7 +37,9 @@ def api_root(request, format=None):
 
 class BlogList(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
+    serializer_class = HyperBlogSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('title','author','text','create_date','category',)
 
 
 # class BlogDetail(APIView):
@@ -69,8 +73,4 @@ class BlogList(generics.ListCreateAPIView):
 class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
     serializer_class = HyperBlogSerializer
-    def get(self, request, pk,*args, **kwargs):
-        x = Blog.objects.get(1)
-        print(repr(x))
-        return super().get(request, *args, **kwargs)
 

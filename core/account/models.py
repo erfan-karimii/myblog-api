@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 # Create your models here.
 
-class AccountDetail(models.Model):
+class AccountInfo(models.Model):
     user_account=models.OneToOneField(User,on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100,null=True,unique=True)
     last_name = models.CharField(max_length=100,null=True,unique=True)

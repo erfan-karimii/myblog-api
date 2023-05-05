@@ -2,7 +2,7 @@ from django.shortcuts import render , redirect
 from .models import Blog, Category,Comment
 from django.core.paginator import Paginator
 from .forms import SearchForm,CommentForm
-from account.models import AccountDetail
+from account.models import AccountInfo
 
 def home(request):
     last_posts = Blog.objects.filter(status_publish='publish').order_by('-create_date')[0:3]
@@ -44,12 +44,16 @@ def about_us(request) :
     return render(request,'blog_folder/about-us.html',context)
 
 def authors_info(request):
-    authors = AccountDetail.objects.all()
+    authors = AccountInfo.objects.all()
     context = {
         'navbar' : 'authors',
         'authors' : authors
     }
     return render(request,'blog_folder/team.html',context)
+
+def author_info_api(request):
+    return render(request,'api_blog_folder/team.html')
+
 
 def detail_blog_view(request,id):
     blog = Blog.objects.get(id=id)
