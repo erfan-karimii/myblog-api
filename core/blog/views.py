@@ -51,8 +51,7 @@ def authors_info(request):
     }
     return render(request,'blog_folder/team.html',context)
 
-def author_info_api(request):
-    return render(request,'api_blog_folder/team.html')
+
 
 
 def detail_blog_view(request,id):

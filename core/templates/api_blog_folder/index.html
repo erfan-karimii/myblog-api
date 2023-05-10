@@ -53,36 +53,8 @@
                         </div>
                     </div> 
                 </div> 
-                <div class="row">
-                {% for x in last_posts %}
+                <div class="row" id="data-div">
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="featured-item">
-                            <div class="thumb">
-                                <div class="thumb-img">
-                                    <img src="{{x.image.url}}" width="230" height="345"  alt="">
-                                </div>
-
-                                <div class="overlay-content">
-                                    <strong title="Author"><i class="fa fa-user"></i> {{x.author}} </strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <strong title="Posted on"><i class="fa fa-calendar"></i>{{x.create_date}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    {% comment %} <strong title="Views"><i class="fa fa-map-marker"></i> 115</strong> {% endcomment %}
-                                </div>
-                            </div>
-
-                            <div class="down-content">
-                                <h4>{{x.title}}</h4>
-
-                                <p> {{x.text|truncatewords:10}} </p>
-
-                                <div class="text-button">
-                
-                                    <a href="{% url 'blog:detail' x.id %}">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {%  endfor  %}
                 </div>
             </div>
         </section>
@@ -106,3 +78,55 @@
     </main>
 </body>
 {% endblock %}
+{% block js %}
+<script>
+$(document).ready(function(){
+    $.ajax({ 
+        type : 'GET',
+        url : "{% url 'blog-list' %}", 
+        dataType : 'json', 
+        success : function(data){
+            let count = 0
+            for (blog of data.results) {
+                if (count == 3) {
+                    break
+                } else {
+                    count = count + 1
+                }
+               $('#data-div').append(`
+               <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="featured-item">
+                    <div class="thumb">
+                        <div class="thumb-img">
+                            <img src="${blog.image}" width="230" height="345"  alt="">
+                        </div>
+
+                        <div class="overlay-content">
+                            <strong title="Author"><i class="fa fa-user"></i> ${blog.author} </strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong title="Posted on"><i class="fa fa-calendar"></i>${blog.create_date}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                            {% comment %} <strong title="Views"><i class="fa fa-map-marker"></i> 115</strong> {% endcomment %}
+                        </div>
+                    </div>
+
+                    <div class="down-content">
+                        <h4>${blog.title}</h4>
+
+                        <p> ${blog.text} (truncatewords) </p>
+
+                        <div class="text-button">
+        
+                            <a href="${blog.url}">Read More</a>
+                        </div>
+                    </div>
+                </div>
+               </div>
+               `)
+               }
+           },
+        error : function(data){
+            alert('error')
+        }
+    });
+});
+</script>
+{% endblock js %}
